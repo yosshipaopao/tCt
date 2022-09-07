@@ -21,3 +21,4 @@ node/token.json
 node/credentials.json
 
 settings/credentials.json
+settings/token.json
