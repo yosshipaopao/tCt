@@ -22,3 +22,4 @@ node/credentials.json
 
 settings/credentials.json
 settings/token.json
+settings/login_config.php
