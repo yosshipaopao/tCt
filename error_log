@@ -1,0 +1,41 @@
+[07-Sep-2022 06:28:33 UTC] PHP Warning:  include(settings/login_config.php): failed to open stream: No such file or directory in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[07-Sep-2022 06:28:33 UTC] PHP Warning:  include(settings/login_config.php): failed to open stream: No such file or directory in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[07-Sep-2022 06:28:33 UTC] PHP Warning:  include(): Failed opening 'settings/login_config.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[07-Sep-2022 06:33:24 UTC] PHP Warning:  include(settings/login_config.php): failed to open stream: No such file or directory in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[07-Sep-2022 06:33:24 UTC] PHP Warning:  include(settings/login_config.php): failed to open stream: No such file or directory in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[07-Sep-2022 06:33:24 UTC] PHP Warning:  include(): Failed opening 'settings/login_config.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[07-Sep-2022 06:33:28 UTC] PHP Warning:  include(settings/login_config.php): failed to open stream: No such file or directory in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[07-Sep-2022 06:33:28 UTC] PHP Warning:  include(settings/login_config.php): failed to open stream: No such file or directory in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[07-Sep-2022 06:33:28 UTC] PHP Warning:  include(): Failed opening 'settings/login_config.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[07-Sep-2022 06:33:28 UTC] PHP Fatal error:  Uncaught Error: Call to a member function createAuthUrl() on null in /home/trvvdmle/public_html/todo/settings/signin-button.php:4
+Stack trace:
+#0 /home/trvvdmle/public_html/todo/index.php(237): include()
+#1 {main}
+  thrown in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 4
+[07-Sep-2022 06:38:52 UTC] PHP Warning:  include(settings/login_config.php): failed to open stream: No such file or directory in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[07-Sep-2022 06:38:52 UTC] PHP Warning:  include(settings/login_config.php): failed to open stream: No such file or directory in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[07-Sep-2022 06:38:52 UTC] PHP Warning:  include(): Failed opening 'settings/login_config.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[07-Sep-2022 06:38:52 UTC] PHP Fatal error:  Uncaught Error: Call to a member function createAuthUrl() on null in /home/trvvdmle/public_html/todo/settings/signin-button.php:4
+Stack trace:
+#0 /home/trvvdmle/public_html/todo/index.php(237): include()
+#1 {main}
+  thrown in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 4
+[08-Sep-2022 03:12:27 UTC] PHP Warning:  include(settings/login_config.php): failed to open stream: No such file or directory in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[08-Sep-2022 03:12:27 UTC] PHP Warning:  include(settings/login_config.php): failed to open stream: No such file or directory in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[08-Sep-2022 03:12:27 UTC] PHP Warning:  include(): Failed opening 'settings/login_config.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[08-Sep-2022 03:12:27 UTC] PHP Fatal error:  Uncaught Error: Call to a member function createAuthUrl() on null in /home/trvvdmle/public_html/todo/settings/signin-button.php:4
+Stack trace:
+#0 /home/trvvdmle/public_html/todo/index.php(237): include()
+#1 {main}
+  thrown in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 4
+[08-Sep-2022 03:13:15 UTC] PHP Warning:  include(settings/login_config.php): failed to open stream: No such file or directory in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[08-Sep-2022 03:13:15 UTC] PHP Warning:  include(settings/login_config.php): failed to open stream: No such file or directory in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[08-Sep-2022 03:13:15 UTC] PHP Warning:  include(): Failed opening 'settings/login_config.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[08-Sep-2022 03:15:17 UTC] PHP Warning:  include(settings/login_config.php): failed to open stream: No such file or directory in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[08-Sep-2022 03:15:17 UTC] PHP Warning:  include(settings/login_config.php): failed to open stream: No such file or directory in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[08-Sep-2022 03:15:17 UTC] PHP Warning:  include(): Failed opening 'settings/login_config.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 2
+[08-Sep-2022 03:15:17 UTC] PHP Fatal error:  Uncaught Error: Call to a member function createAuthUrl() on null in /home/trvvdmle/public_html/todo/settings/signin-button.php:4
+Stack trace:
+#0 /home/trvvdmle/public_html/todo/index.php(237): include()
+#1 {main}
+  thrown in /home/trvvdmle/public_html/todo/settings/signin-button.php on line 4
