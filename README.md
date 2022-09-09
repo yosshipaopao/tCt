@@ -1,3 +1,4 @@
+
 # tclb Classroom todo
 ~~ネーミングセンスとは？~~
  [https://github.com/apple-pi-yhhhh/newTCLB-ProjectsFrame](#%20tCt%20%20from%20https://github.com/apple-pi-yhhhh/newTCLB-ProjectsFrame)
@@ -7,7 +8,7 @@
 とりあえず使ってるもの一覧
 ### Classroom api
 Google Apis からの出張です。
-もともと[GASで作ったの](https://yosshipaopao.com/classroom)を移行したんだけどほぼ一新してる
+もともと[GASで作ったの](https://classroom.yosshipaopao.com)を移行したんだけどほぼ一新してる
 ### firebase cloud messaging
 これまじむずい
 ## 初期設定
