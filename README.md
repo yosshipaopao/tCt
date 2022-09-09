@@ -1,7 +1,7 @@
 
 # tclb Classroom todo
 ~~ネーミングセンスとは？~~
- [https://github.com/apple-pi-yhhhh/newTCLB-ProjectsFrame](#%20tCt%20%20from%20https://github.com/apple-pi-yhhhh/newTCLB-ProjectsFrame)
+ [https://github.com/apple-pi-yhhhh/newTCLB-ProjectsFrame](https://github.com/apple-pi-yhhhh/newTCLB-ProjectsFrame)
 上記のプロジェクトの一部のtclb Classroom todo( tCt ) です。
 
 ## 仕様説明(できるほど理解していない)
