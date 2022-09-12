@@ -1,6 +1,6 @@
 exports.notifaction = function (classid_topic, n_title, n_body, n_url) {
 	const admin = require("firebase-admin");
-	const serviceAccount = require("/home/trvvdmle/public_html/todo/fcm/serviceAccountKey.json");
+	const serviceAccount = require("/home/trvvdmle/public_html/todo/node/serviceAccountKey.json");
 	if (n_title == undefined) {
 		n_title = "通知のタイトル"
 	}
