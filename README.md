@@ -13,7 +13,20 @@ Google Apis からの出張です。
 これまじむずい
 ## 初期設定
 ### 足りないものなんだ
- - GoogleのGCPの`credentials.json`		
+ - Modules
+#### モジュール
+##### node
+##### php(composer)
+ - GoogleのGCPの`credentials.json`
+#### tokenの場所
+``node/serviceAccountKey.json ``
+``node/credentials.json``
+``settings/credentials.json``
  - phpでGoogleログイン用のなんかトークン？
  - Mysqlの設定
-あとは忘れた
+ #### Mysql
+ - crontab
+#### crontab
+``*/1  6-15 * * MON-FRI node index.js ``
+``0  0-5,16-23/1 * * MON-FRI node index.js``
+``0 */1 * * SUN,SAT node index.js``
