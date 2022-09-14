@@ -8,16 +8,22 @@
     <link rel='stylesheet' href='css/menu.css'>
     <link rel='stylesheet' href='css/locomotive-scroll.min.css'>
     <style>
-      [data-scroll-call='fade-in'] {
+      [data-scroll-class='fade-in'] {
         opacity: 0;
         visibility: hidden;
         transform: translateY(100px);
         transition: opacity 2s, transform 2s;
       }
-      [data-scroll-call='fade-in'].show {
+      [data-scroll-class='fade-in'].fade-in {
         opacity: 1;
         visibility: visible;
         transform: translateY(0px);
+      }
+      .each-span-ib{
+          margin-top: 50px;
+      }
+      .each-span-ib span{
+          display:inline-block;
       }
     </style>
   </head>
@@ -29,8 +35,8 @@
             <nav class='navbar navbar-expand-md navbar-light'>
               <a class='navbar-brand' href='/'>
                 <!--<img src='https://assets.codepen.io/1462889/fcy.png' alt=''>-->
-                <h2>tCt
-                </h2>
+                <h1 class="m-0">tCt
+                </h1>
               </a>
               <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
                 <span class='navbar-toggler-icon'>
@@ -87,10 +93,10 @@
       <div id='top' class='mx-auto text-center' style='height: 100vh;'>
         <div id='direction' style='height:35vh;'>
         </div>
-        <h1 class='display-4 my-5' data-scroll data-scroll data-scroll-delay='0.1' data-scroll-speed='-8'>tclb Classroom todo
+        <h1 class='display-4 my-5' data-scroll data-scroll data-scroll-delay='0.1' data-scroll-speed='2'>tclb Classroom todo
         </h1>
         <div id='targrt'>
-          <div class='my-5 position-sticky' data-scroll='' data-scroll-direction='horizontal' data-scroll-speed='8' data-scroll data-scroll-delay='0.05' data-scroll-position='top'>
+          <div class='my-5 position-sticky' data-scroll data-scroll-direction='horizontal' data-scroll-speed='-10' data-scroll data-scroll-delay='0.05' data-scroll-position='top'>
             <p class='lead m-auto'>リード文がここに書かれるってま？
               <br>二行目を試しに書いてみたあと
               <br>三行目を書くのがいいのだ！
@@ -105,11 +111,9 @@
       <div id='element2' style='height: 100vh;background:#ddd;'>
         <div style='height:15vh;'>
         </div>
-        <h2 class='display-4' data-scroll data-scroll-repeat data-scroll-call='fade-in'>What the 
-          <span data-scroll data-scroll-repeat data-scroll-call='randomcolor'>tCt?
-          </span>
-        </h2>
+        <div class='display-4 ml-5 each-span-ib' data-scroll data-scroll-repeat data-scroll-class='fade-in'>What the tCt?</span></div>
       </div>
+      <div class="vh-100"></div>
     </div>
     <script src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous'>
     </script>
@@ -122,6 +126,16 @@
     <script src='js/locomotive-scroll.min.js'>
     </script>
     <script>
+     $(".each-span-ib").each( function( index, element ){
+        let text = $(element).text();
+        let texted ="";
+        for (var i = 0; i < text.length; i++) {
+            if(text[i]==' '){texted+=' '}else{
+          texted+="<span data-scroll data-scroll-repeat data-scroll-speed='6' data-scroll-delay='"+(text.length-i)*0.1+"'>"+text[i]+"</span>";
+            }
+        }
+        $(element).html(texted);
+     });
       const scroll = new LocomotiveScroll({
         el: document.querySelector('[data-scroll-container]'),
         smooth: true
