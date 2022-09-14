@@ -1,6 +1,6 @@
 <?php
-include('settings/login_config.php');
 if(!isset($_COOKIE["email"])){
+    include('settings/login_config.php');
 $login_button = '<a style="position: fixed;display:block;left:85vw;z-index: 10000;" href="'.$google_client->createAuthUrl().'"><img style="display:flex;left:85vw;z-index: 10000;height:50px;" src="signin.png"></a>';
 echo $login_button;
 }else{

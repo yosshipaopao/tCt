@@ -1,237 +1,186 @@
-<?php session_start();?>
-<!DOCTYPE html><html><head><title>TODOリストβ</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script><link rel="icon" href="//ssl.gstatic.com/classroom/ic_product_classroom_32.png" sizes="32x32">
-<script>
-<?php
-$user_email = $_COOKIE['email'];
-$user_name = $_COOKIE['name'];
-$user_id = $_COOKIE['uid'];
-echo 'const name = "'.$user_name.'";const email = "'.$user_email.'";const uid = "'.$user_id.'";';
-?>
-var today = new Date()
-var yearStr = today.getFullYear();
-var monthStr = today.getMonth() + 1;
-const d = document;
-const se = sessionStorage;
-
-function plus_month() {
-	monthStr += 1;
-	if (monthStr > 12) {
-		monthStr -= 12;
-		yearStr += 1;
-	}
-	view_calender();
-}
-
-function minus_month() {
-	monthStr -= 1;
-	if (monthStr < 1) {
-		monthStr += 12;
-		yearStr -= 1;
-	}
-	view_calender();
-}
-
-function view_calender() {
-    
-    var point=d.getElementById('point');
-	point.innerHTML = "";
-	
-    var month_text = d.createElement('p');
-	var year_text = d.createElement('p');
-    month_text.innerHTML = monthStr;
-	year_text.innerHTML = yearStr;
-	point.appendChild(year_text);
-	point.appendChild(month_text);
-
-	var minus_button = d.createElement('button');
-	minus_button.onclick = minus_month;
-	minus_button.innerHTML = '←';
-	var plus_button = d.createElement('button');
-	plus_button.onclick = plus_month;
-	plus_button.innerHTML = '→';
-
-	var info = d.createElement("div");
-	info.className = 'info';
-	var date_view = d.createElement("div");
-	date_view.appendChild(year_text);
-	date_view.appendChild(month_text);
-	date_view.className = 'date_min';
-
-	info.appendChild(minus_button);
-	info.appendChild(date_view);
-	info.appendChild(plus_button);
-
-	point.appendChild(info);
-
-	var table = d.createElement('table');
-	var dates = d.createElement('tr');
-    table.className = 'calender';
-	dates.className = 'date';
-
-	const date_list = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-	
-    for (var i in date_list) {
-		var date_th = d.createElement('th');
-		var date = d.createElement('div');
-		date_th.className = date_list[i];
-		date.innerHTML = date_list[i];
-		date_th.appendChild(date);
-		dates.appendChild(date_th);
-	}
-
-	table.appendChild(dates);
-	point.appendChild(table);
-	var cale = new Date(yearStr, monthStr - 1, 1);
-	var start_point = cale.getDay();
-	var cale = new Date(yearStr, monthStr, 0);
-	var end_point = cale.getDate();
-	if((""+monthStr).length==1){
-	    monthStrstr = "0"+monthStr;
-	}
-	else{monthStrstr=monthStr;}
-	if (end_point + start_point > 35) {
-		var rep_weeks = 6
-	} else {
-		var rep_weeks = 5
-	}
-	for (var i = 0; i < rep_weeks; i++) {
-		var days = d.createElement('tr');
-		days.className = 'week' + (i + 1);
-		for (var j = 0; j < 7; j++) {
-			var day_num = i * 7 + (j + 1) - start_point;
-			var day_th = d.createElement('th');
-			if((""+day_num).length == 1){
-                day_numstr = "0"+day_num;
-			}else{day_numstr=day_num;}
-			day_th.id = 'day' + day_numstr;
-			var day = d.createElement('div');
-			day.className = "day_div";
-			var todolink = d.createElement('a');
-			
-			if (day_num > 0 && day_num <= end_point) {
-				day.innerHTML = day_num;
-				
-				todolink.href = "calender/"+uid+"/"+yearStr+"-"+monthStrstr+"-"+day_numstr;
-			} else {
-				day.innerHTML = "";
-			}
-			var todos = d.createElement("div");
-			todos.className="todos";
-			todos.id=day_numstr;
-
-			todolink.appendChild(day)
-			
-
-			day.appendChild(todos)
-			day_th.appendChild(todolink);
-			days.appendChild(day_th);
-		}
-		table.appendChild(days);
-	}
-	point.appendChild(table);
-	
-	if(JSON.parse(se.getItem("se_cl_json"))[yearStr+"-"+monthStrstr]!=undefined){
-	    data = JSON.parse(se.getItem("se_cl_json"))[yearStr+"-"+monthStrstr];
-	    for (var key in data) {
-            var dt = data[key];
-            var day_task = d.getElementById(""+dt.date);
-            var task = d.createElement("div");
-            task.innerHTML=dt.info;
-            task.className="task";
-            day_task.appendChild(task);
+<!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset='UTF-8'>
+    <title>tCt-Home
+    </title>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css' integrity='sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk' crossorigin='anonymous'>
+    <link rel='stylesheet' href='css/menu.css'>
+    <link rel='stylesheet' href='css/locomotive-scroll.min.css'>
+    <style>
+      [data-scroll-call='fade-in'] {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(100px);
+        transition: opacity 2s, transform 2s;
+      }
+      [data-scroll-call='fade-in'].show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class='navigation-wrap bg-light start-header start-style'>
+      <div class='container'>
+        <div class='row'>
+          <div class='col-12'>
+            <nav class='navbar navbar-expand-md navbar-light'>
+              <a class='navbar-brand' href='/'>
+                <!--<img src='https://assets.codepen.io/1462889/fcy.png' alt=''>-->
+                <h2>tCt
+                </h2>
+              </a>
+              <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
+                <span class='navbar-toggler-icon'>
+                </span>
+              </button>
+              <div class='collapse navbar-collapse' id='navbarSupportedContent'>
+                <ul class='navbar-nav ml-auto py-4 py-md-0'>
+                  <li class='nav-item pl-4 pl-md-0 ml-0 ml-md-4 active'>
+                    <a class='nav-link' href='#top' data-scroll-to>Home
+                    </a>
+                  </li>
+                  <li class='nav-item pl-4 pl-md-0 ml-0 ml-md-4'>
+                    <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>Calender
+                    </a>
+                    <div class='dropdown-menu'>
+                      <a class='dropdown-item' href='#'>Today
+                      </a>
+                      <a class='dropdown-item' href='#'>Week
+                      </a>
+                      <a class='dropdown-item' href='#'>Month
+                      </a>
+                    </div>
+                  </li>
+                  <!--Logined-->
+                  <li class='nav-item pl-4 pl-md-0 ml-0 ml-md-4'>
+                    <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>Account
+                    </a>
+                    <div class='dropdown-menu'>
+                      <p class='dropdown-item'>
+                        <img src='https://lh3.googleusercontent.com/a/AItbvmnMuknWwatkY9HB8HjNLBmQcDY-XRiF5k5YGz4T=s96-c' style='height: 20px;'>Account Name</p>
+                      <a class='dropdown-item' href='#'>settings
+                      </a>
+                      <a class='dropdown-item' href='#'>Notifaction
+                      </a>
+                      <a class='dropdown-item' href='#'>Todo
+                      </a>
+                    </div>
+                  </li>
+                  <!--fin logined-->
+                  <!--not Logined-->
+                    <li class='nav-item pl-4 pl-md-0 ml-0 ml-md-4 active'>
+                        <a class='nav-link' href='<?php include('settings/login_config.php'); echo $google_client->createAuthUrl();?>' data-scroll-to>Login</a>
+                    </li>
+                  <!--fin not logined-->
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div data-scroll-container>
+      <div id='top' class='mx-auto text-center' style='height: 100vh;'>
+        <div id='direction' style='height:35vh;'>
+        </div>
+        <h1 class='display-4 my-5' data-scroll data-scroll data-scroll-delay='0.1' data-scroll-speed='-8'>tclb Classroom todo
+        </h1>
+        <div id='targrt'>
+          <div class='my-5 position-sticky' data-scroll='' data-scroll-direction='horizontal' data-scroll-speed='8' data-scroll data-scroll-delay='0.05' data-scroll-position='top'>
+            <p class='lead m-auto'>リード文がここに書かれるってま？
+              <br>二行目を試しに書いてみたあと
+              <br>三行目を書くのがいいのだ！
+            </p>
+          </div>
+        </div>
+        <a href='#element2' class='btn btn-lg btn-secondary my-5 shadow' data-scroll data-scroll data-scroll-delay='0.2' data-scroll-position='top' data-scroll-to>More
+        </a>
+        <button onclick='changemode()' class='btn btn-lg btn-secondary my-5 shadow' id='swtich'>Dark OR LIGHT
+        </button>
+      </div>
+      <div id='element2' style='height: 100vh;background:#ddd;'>
+        <div style='height:15vh;'>
+        </div>
+        <h2 class='display-4' data-scroll data-scroll-repeat data-scroll-call='fade-in'>What the 
+          <span data-scroll data-scroll-repeat data-scroll-call='randomcolor'>tCt?
+          </span>
+        </h2>
+      </div>
+    </div>
+    <script src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous'>
+    </script>
+    <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'>
+    </script>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js' integrity='sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI' crossorigin='anonymous'>
+    </script>
+    <script src='js/menu.js'>
+    </script>
+    <script src='js/locomotive-scroll.min.js'>
+    </script>
+    <script>
+      const scroll = new LocomotiveScroll({
+        el: document.querySelector('[data-scroll-container]'),
+        smooth: true
+      }
+    );
+      const arrayOfColors = [
+        '#0a9396',
+        '#005f73',
+        '#ae2012',
+        '#3d405b',
+        '#003049',
+        '#bc6c25',
+        '#ff006e',
+        '#ef476f',
+        '#1982c4',
+        '#ee964b',
+        '#0ead69',
+        '#390099',
+        '#f6aa1c',
+        '#54101d',
+        '#2b2c28',
+        '#85c7f2',
+        '#e15a97',
+        '#2b70e3',
+        '#b36a5e'
+      ];
+      function getRandomColor() {
+        const arrayLength = arrayOfColors.length;
+        const randomValue = Math.random() * arrayLength;
+        const roundedNumber = Math.floor(randomValue);
+        const color = arrayOfColors[roundedNumber];
+        return color;
+      }
+      scroll.on('call', (value, way, obj) => {
+        if (value === 'fade-in') {
+          if (way === 'enter') {
+            obj.el.classList.add('show')
+          }
+          else if (way === 'exit'){
+            obj.el.classList.remove('show')
+          }
         }
-	}
-	else{
-        var url="task.php?table="+uid+"&search="+yearStr+"-"+monthStrstr;
-        $.getJSON(url, (data) => {
-            var se_cl_json = JSON.parse(se.getItem("se_cl_json"));
-            se_cl_json[yearStr+"-"+monthStrstr] = data;
-            se.setItem("se_cl_json",JSON.stringify(se_cl_json));
-            for (var key in data) {
-                var dt = data[key];
-                var day_task = d.getElementById(""+dt.date);
-                var task = d.createElement("div");
-                task.innerHTML=dt.info;
-                task.className="task";
-                day_task.appendChild(task);
-            }
-        });
-	    
-	}
-	
-}
-
-//calender.js
-
-function oritatami_f(){
-    var idnm = d.getElementsByTagName("header")[0];
-    console.log(idnm.id);
-    if(idnm.id == 'oritatami-before'){  
-        idnm.id ='oritatami-after';
-        d.getElementsByClassName('oritatami')[0].innerHTML='▼';
-
-    }
-    else{
-        idnm.id = 'oritatami-before';
-        d.getElementsByClassName('oritatami')[0].innerHTML='▲';
-    }
-}
-function build_page() {
-	var data = {};
-	data.title = 'TODOリストβ';
-	data.sub_title = 'スケジュール管理や通知を行う予定';
-	var body = d.getElementsByTagName('body')[0];
-    var header = d.createElement('header');
-    header.id = 'oritatami-before';
-	body.appendChild(header);
-	body.appendChild(d.createElement('main'));
-	body.appendChild(d.createElement('footer'));
-
-    var info = d.createElement('div');
-    
-	var main = d.getElementsByTagName('main')[0];
-    var header = d.getElementsByTagName('header')[0];
-	var title = d.createElement('h1');
-	title.innerHTML = data.title;
-	header.appendChild(title);
-
-	var sub_title = d.createElement('h2');
-	sub_title.innerHTML = data.sub_title;
-	header.appendChild(sub_title);
-	
-    var li_cr = d.createElement('a');
-    li_cr.href="create_task.php";
-    li_cr.innerHTML="課題作成";
-    header.appendChild(li_cr);
-    
-    var se_cl = d.createElement('button');
-    se_cl.onclick = function() {
-	    se.removeItem('se_cl_json');
-	    se.setItem("se_cl_json","{}");
-	    view_calender();
-    };
-    se_cl.style = "height:auto;"
-    se_cl.innerHTML="更新";
-    header.appendChild(se_cl);
-	
-    var oritatami = d.createElement('button');
-    oritatami.innerHTML="▲";
-    oritatami.className="oritatami";
-    oritatami.setAttribute('onclick', 'oritatami_f()');
-    header.appendChild(oritatami);
-
-    var point = d.createElement('div');
-	point.id = 'point';
-	main.appendChild(point);
-}
-
-
-window.onload = function () {
-    se.setItem("se_cl_json","{}")
-	build_page();
-	view_calender();
-	
-}
-</script>
-<style>th{width:15vw;height:15vw}.day_div{background-color:aqua;height:100%;width:100%;box-shadow:none;opacity:1}.day_div:hover{box-shadow:.5vw .5vw 1vw #aaaaaa,-.5vw -.5vw 1vw #fff;transition:all .5s;opacity:.5}.point{display:inline-block;margin:0 auto}.calender{display:inline-block}main{top:100px;text-align:center;margin:100px 0 0}button{height:5vw;width:5vw}.date_min{height:100px;width:85vw;display:inline-block}header{position:fixed;background-color:blue;width:100vw;margin:0;padding:0;line-height:0;left:0;z-index:100}.oritatami{position:fixed;display:inline-block;left:95%;height:40px;width:40px;border-radius:100%}#oritatami-before{top:0;transition:all ease .5s}#oritatami-after{top:-70px;transition:all ease .5s}.date th{height:20px}.todos{width:100%;height:90%;background-color:#9acd32}.task{background-color:#000;border-radius:10px;}</style>
-</head><body><?php include("settings/signin-button.php"); ?></body></html>
+        else if (value === 'randomcolor') {
+          if (way === 'enter') {
+            obj.el.style.color = getRandomColor();
+          }
+        }
+      }
+               );
+    </script>
+    <script>
+      function changemode() {
+        if ($('body').hasClass('dark')) {
+          $('body').removeClass('dark');
+          document.querySelector('#swtich').textContent='DARK';
+        }
+        else {
+          $('body').addClass('dark');
+          document.querySelector('#swtich').textContent='LIGHT';
+        }
+      }
+    </script>
+  </body>

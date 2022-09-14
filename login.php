@@ -45,11 +45,6 @@ if(isset($_COOKIE["email"])){
     setcookie('name',$_COOKIE['name'],$time);
     setcookie('uid',$_COOKIE['uid'],$time);
     setcookie('img',$_COOKIE['img'],$time);
-    //session
-    $_SESSION['email'] = $_COOKIE['email'];
-    $_SESSION['name'] = $_COOKIE['name'];
-    $_SESSION['id'] = $_COOKIE['uid'];
-    $_SESSION['img'] = $_COOKIE['img'];
 }
 elseif(!isset($_SESSION['access_token'])){
  $login_button = '<a href="'.$google_client->createAuthUrl().'"><img src="signin.png" /></a>';
