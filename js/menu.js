@@ -1,6 +1,3 @@
-/* Please ❤ this if you like it! */
-
-
 (function($) { "use strict";
 
 	$(function() {
@@ -15,12 +12,6 @@
 			}
 		});
 	});		
-		
-	//Animation
-	
-	$(document).ready(function() {
-		$('body.hero-anime').removeClass('hero-anime');
-	});
 
 	//Menu On Hover
 		

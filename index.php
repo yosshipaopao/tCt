@@ -55,25 +55,26 @@
                     </div>
                   </li>
                   <!--Logined-->
-                  <li class='nav-item pl-4 pl-md-0 ml-0 ml-md-4'>
-                    <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>Account
-                    </a>
-                    <div class='dropdown-menu'>
+                  
+                    
+                    
+                    
+                  <!--fin logined-->
+                  <!--not Logined-->
+                  <?php if(isset($_COOKIE["name"])){echo "<li class='nav-item pl-4 pl-md-0 ml-0 ml-md-4'><a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>Account</a>
+                  <div class='dropdown-menu'>
                       <p class='dropdown-item'>
-                        <img src='https://lh3.googleusercontent.com/a/AItbvmnMuknWwatkY9HB8HjNLBmQcDY-XRiF5k5YGz4T=s96-c' style='height: 20px;'>Account Name</p>
-                      <a class='dropdown-item' href='#'>settings
+                        <img src='".$_COOKIE["img"]."' style='height: 20px;'>".$_COOKIE["name"]."</p>
+                      <a class='dropdown-item' href='/'>settings
                       </a>
-                      <a class='dropdown-item' href='#'>Notifaction
+                      <a class='dropdown-item' href='/subscribe'>Notifaction
                       </a>
-                      <a class='dropdown-item' href='#'>Todo
+                      <a class='dropdown-item' href='/calender'>Todo
                       </a>
                     </div>
                   </li>
-                  <!--fin logined-->
-                  <!--not Logined-->
-                    <li class='nav-item pl-4 pl-md-0 ml-0 ml-md-4 active'>
-                        <a class='nav-link' href='<?php include('settings/login_config.php'); echo $google_client->createAuthUrl();?>' data-scroll-to>Login</a>
-                    </li>
+                  ";}
+                  else{include('settings/login_config.php');echo "<li class='nav-item pl-4 pl-md-0 ml-0 ml-md-4'><a class='nav-link' href='".$google_client->createAuthUrl()."' data-scroll-to>Login</a></li>";}?>
                   <!--fin not logined-->
                 </ul>
               </div>
@@ -169,7 +170,17 @@
           }
         }
       }
-               );
+    );
+    let header = $(".start-style");
+    scroll.on('scroll', ({ limit, scroll }) => {
+        
+      const progress = scroll.y;
+      if (scroll.y >= 400) {
+				header.removeClass('start-style').addClass("scroll-on");
+			} else {
+				header.removeClass("scroll-on").addClass('start-style');
+			}
+    })
     </script>
     <script>
       function changemode() {
