@@ -42,7 +42,7 @@ body{
 }
 .start-header.scroll-on {
 	box-shadow: 0 5px 10px 0 rgba(138, 155, 165, 0.15);
-	padding: 5px 0;
+	padding: 0px 0;
 	-webkit-transition : all 0.3s ease-out;
 	transition : all 0.3s ease-out;
 }
