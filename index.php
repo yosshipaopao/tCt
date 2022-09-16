@@ -117,6 +117,8 @@
 		        color: #fff;
 		    }
 		</style>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 	</head>
 	<body>
 		<div class='navigation-wrap bg-light start-header start-style'>
@@ -164,10 +166,10 @@ else{include('settings/login_config.php');echo "
 											</li>
 ";}?>
 									<li class='nav-item pl-4 pl-md-0 ml-0 ml-md-4 active'>
-									    <button id="modalBtn" type="button" class="btn btn-sm btn-outline-dark" data-toggle="modal" data-target="#exampleModalCentered"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
-  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
-  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
-</svg>サイトの設定</button>
+									    <button id="modalBtn" type="button" class="btn btn-sm btn-outline-dark" data-toggle="modal" data-target="#exampleModalCentered">
+									        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+    									        <use xlink:href="bootstrap-icons.svg#gear"/>
+    									    </svg>サイトの設定</button>
 									</li>
      							</ul>
 							</div>
@@ -182,7 +184,7 @@ else{include('settings/login_config.php');echo "
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenteredLabel">title</h5>
+          <h5 class="modal-title" id="exampleModalCenteredLabel">サイトの設定</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -190,6 +192,7 @@ else{include('settings/login_config.php');echo "
         <!-- contents -->
         <div class="modal-body">
                 <button onclick='changemode()' class='btn btn-sm btn-outline-dark' id='swtich'>DARK</button>
+                <button onclick='scrollsupporterchange()' class='btn btn-sm btn-outline-dark' id='scrollsupporter'>スクロール補助:on</button>
         </div>
       </div>
     </div>
@@ -217,12 +220,17 @@ else{include('settings/login_config.php');echo "
 			<div style='height:30vh;' ></div>
 			<div id='element3' style='height:200vh;'></div>
 		</div>
-		<script src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous'></script>
 		<script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script>
 		<script src='js/bootstrap.min.js'></script>
 		<script src='js/menu.js'></script>
 		<script src='js/locomotive-scroll.min.js'></script>
 		<script>
+		if($.cookie('darkmode')=='true'){
+		    $('body').addClass('dark');
+			$('#swtich').text('LIGHT')
+			$('.btn-outline-dark').addClass('btn-outline-light').removeClass('btn-outline-dark');
+		}
+		$('#scrollsupporter').text(`スクロール補助:${$.cookie('scrollsupport')=='true' ? 'on':'off'}`);
 			$(".each-span-ib").each(function(index, element) {
 				let text = $(element).text();
 				let texted = "";
@@ -267,6 +275,7 @@ else{include('settings/login_config.php');echo "
 		            scroll.start()
 		        }, 1100);
 			}
+			let scrollsupporteron = $.cookie('scrollsupport')!='false';
 			scroll.on('scroll', ({limit,scroll}) => {
     		    let maxheight = window.innerHeight;
 				const progress = scroll.y;
@@ -281,41 +290,57 @@ else{include('settings/login_config.php');echo "
     					header.removeClass("scroll-on").addClass('start-style');
 				    }
 				}
-				//上に移動
-				if (progbefore-progress > 10 && !scrolling) {
-				    //element2からtopに
-				    if (scroll.y <= maxheight*1.2) {
-				        scrollto("#top",1000)
-				    }
-				    //element3からelement2に
-				    if (scroll.y <= maxheight*2.4 && scroll.y >= maxheight*1.4) {
-				        scrollto("#element2",1000)
-				    }
+				//スクロールサポーター
+				if(scrollsupporteron){
+    				//上に移動
+    				if (progbefore-progress > 10 && !scrolling) {
+    				    //element2からtopに
+    				    if (scroll.y <= maxheight*1.2) {
+    				        scrollto("#top",1000)
+    				    }
+    				    //element3からelement2に
+    				    if (scroll.y <= maxheight*2.4 && scroll.y >= maxheight*1.4) {
+    				        scrollto("#element2",1000)
+    				    }
+    				}
+    				//下に移動
+    				if (progbefore-progress < -10 && !scrolling) {
+    				    //topからelement2に
+    				    if (scroll.y <= maxheight*0.8) {
+    				        scrollto("#element2",1000)
+    				    }
+    				    //element2からelement3に
+    				    if (scroll.y >=  maxheight*1.3 && scroll.y <= maxheight*1.5) {
+    				        scrollto("#element3",1000)
+    				    }
+    				}
+    				progbefore = scroll.y;
 				}
-				//下に移動
-				if (progbefore-progress < -10 && !scrolling) {
-				    //topからelement2に
-				    if (scroll.y <= maxheight*0.8) {
-				        scrollto("#element2",1000)
-				    }
-				    //element2からelement3に
-				    if (scroll.y >=  maxheight*1.3 && scroll.y <= maxheight*1.5) {
-				        scrollto("#element3",1000)
-				    }
-				}
-				progbefore = scroll.y;
 			});
+			function scrollsupporterchange(){
+			    if(scrollsupporteron){
+			        scrollsupporteron=false;
+			        $.cookie('scrollsupport','false');
+			        $('#scrollsupporter').text('スクロール補助:off')
+			    }else{
+			        scrollsupporteron=true;
+			        $.cookie('scrollsupport','true');
+			        $('#scrollsupporter').text('スクロール補助:on')
+			    }
+			}
 		</script>
 		<script>
 			function changemode() {
 				if ($('body').hasClass('dark')) {
 					$('body').removeClass('dark');
-					$('#swtich').text('DARK').removeClass('btn-outline-light').addClass('btn-outline-dark')
-					$('#modalBtn').removeClass('btn-outline-light').addClass('btn-outline-dark')
+					$('#swtich').text('DARK')
+					$('.btn-outline-light').addClass('btn-outline-dark').removeClass('btn-outline-light')
+					$.cookie('darkmode','false');
 				} else {
 					$('body').addClass('dark');
-					$('#swtich').text('LIGHT').removeClass('btn-outline-dark').addClass('btn-outline-light')
-					$('#modalBtn').removeClass('btn-outline-dark').addClass('btn-outline-light')
+					$('#swtich').text('LIGHT')
+					$('.btn-outline-dark').addClass('btn-outline-light').removeClass('btn-outline-dark');
+					$.cookie('darkmode','true');
 				}
 			}
 		</script>
