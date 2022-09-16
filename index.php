@@ -8,6 +8,7 @@
 		<link rel='stylesheet' href='css/menu.css'>
 		<link rel='stylesheet' href='css/locomotive-scroll.min.css'>
 		<style>
+		    @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css");
 			[data-scroll-class='fade-in'] {
 				opacity: 0;
 				visibility: hidden;
@@ -83,6 +84,21 @@
 			.c-scrollbar{
 			    z-index:100000;
 			}
+			#progress-bar {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 0;
+              height: 5px;
+              background: #F18A48;
+            }
+            .modal-content{
+                opacity: 0;
+                transition: opacity 0.5s;
+            }
+            .modal.show .modal-content{
+                opacity: 1;
+            }
 		</style>
 		<style>
 		    body.dark #back-deg{
@@ -91,10 +107,20 @@
 		    body.dark #element2::before{
 		        background-color: #357F94;
 		    }
+		    body.dark #progress-bar{
+		        background: #357F94;
+		    }
+		    body.dark .modal-content{
+		        background-color: #000;
+		    }
+		    body.dark .close{
+		        color: #fff;
+		    }
 		</style>
 	</head>
 	<body>
 		<div class='navigation-wrap bg-light start-header start-style'>
+		    <div id='progress-bar'></div>
 			<div class='container'>
 				<div class='row'>
 					<div class='col-12'>
@@ -136,16 +162,39 @@ else{include('settings/login_config.php');echo "
 											<li class='nav-item pl-4 pl-md-0 ml-0 ml-md-4'>
 												<a class='nav-link' href='".$google_client->createAuthUrl()."' data-scroll-to>Login</a>
 											</li>
-";}?>                               <li class='nav-item pl-4 pl-md-0 ml-0 ml-md-4'>
-                                        <button onclick='changemode()' class='btn btn-sm btn-outline-dark' id='swtich'>DARK</button>
-                                    </li>
-								</ul>
+";}?>
+									<li class='nav-item pl-4 pl-md-0 ml-0 ml-md-4 active'>
+									    <button id="modalBtn" type="button" class="btn btn-sm btn-outline-dark" data-toggle="modal" data-target="#exampleModalCentered"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+</svg>サイトの設定</button>
+									</li>
+     							</ul>
 							</div>
 						</nav>
 					</div>
 				</div>
 			</div>
 		</div>
+		<!--modal-->
+		  <div class="modal" id="exampleModalCentered" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenteredLabel">title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!-- contents -->
+        <div class="modal-body">
+                <button onclick='changemode()' class='btn btn-sm btn-outline-dark' id='swtich'>DARK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--modalfin-->
 		<div data-scroll-container>
 			<div id='top' class='mx-auto text-center' style='height: 100vh;'>
 				<div id='direction' style='height:35vh;'></div>
@@ -162,14 +211,15 @@ else{include('settings/login_config.php');echo "
     		    <div id='back-deg' data-scroll data-scroll-repeat data-scroll-offset='0,-50%' data-scroll-class='fade-inl'></div>
     			<div class="" id='element2' data-scroll data-scroll-repeat data-scroll-offset='0,-50%' data-scroll-class='fade-inr'>
     			    <div class="space" ></div>
-    				<div class='display-4 ml-5 each-span-ib' style='margin-top:20vh;' data-scroll data-scroll-repeat data-scroll-class='fade-in'>What the tCt? </span></div>
+    				<div class='display-4 ml-5 each-span-ib' style='margin-top:20vh;' data-scroll data-scroll-repeat data-scroll-class='fade-in'>What is tCt? </span></div>
     			</div>
 			</div>
-			<div style='height:200vh;'></div>
+			<div style='height:30vh;' ></div>
+			<div id='element3' style='height:200vh;'></div>
 		</div>
 		<script src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous'></script>
 		<script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script>
-		<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js' integrity='sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI' crossorigin='anonymous'></script>
+		<script src='js/bootstrap.min.js'></script>
 		<script src='js/menu.js'></script>
 		<script src='js/locomotive-scroll.min.js'></script>
 		<script>
@@ -206,16 +256,54 @@ else{include('settings/login_config.php');echo "
 				}
 			});
 			let header = $(".start-style");
-			scroll.on('scroll', ({
-				limit,
-				scroll
-			}) => {
+			let progbefore = 0;
+			let scrolling = false;
+			function scrollto(target,time){
+		        scrolling=true;
+		        scroll.stop()
+			    scroll.scrollTo(target,{duration: time});
+		        setTimeout(function(){
+		            scrolling=false;
+		            scroll.start()
+		        }, 1100);
+			}
+			scroll.on('scroll', ({limit,scroll}) => {
+    		    let maxheight = window.innerHeight;
 				const progress = scroll.y;
-				if (scroll.y >= 400) {
-					header.removeClass('start-style').addClass("scroll-on");
+				$('#progress-bar').css({'width' : `${progress / limit.y * 100}vw`});
+			    //ヘッダーの長さ
+				if (scroll.y >= (maxheight*0.4)) {
+				    if(header.hasClass('start-style')){
+    					header.removeClass('start-style').addClass("scroll-on");
+				    }
 				} else {
-					header.removeClass("scroll-on").addClass('start-style');
+				    if(header.hasClass('scroll-on')){
+    					header.removeClass("scroll-on").addClass('start-style');
+				    }
 				}
+				//上に移動
+				if (progbefore-progress > 10 && !scrolling) {
+				    //element2からtopに
+				    if (scroll.y <= maxheight*1.2) {
+				        scrollto("#top",1000)
+				    }
+				    //element3からelement2に
+				    if (scroll.y <= maxheight*2.4 && scroll.y >= maxheight*1.4) {
+				        scrollto("#element2",1000)
+				    }
+				}
+				//下に移動
+				if (progbefore-progress < -10 && !scrolling) {
+				    //topからelement2に
+				    if (scroll.y <= maxheight*0.8) {
+				        scrollto("#element2",1000)
+				    }
+				    //element2からelement3に
+				    if (scroll.y >=  maxheight*1.3 && scroll.y <= maxheight*1.5) {
+				        scrollto("#element3",1000)
+				    }
+				}
+				progbefore = scroll.y;
 			});
 		</script>
 		<script>
@@ -223,9 +311,11 @@ else{include('settings/login_config.php');echo "
 				if ($('body').hasClass('dark')) {
 					$('body').removeClass('dark');
 					$('#swtich').text('DARK').removeClass('btn-outline-light').addClass('btn-outline-dark')
+					$('#modalBtn').removeClass('btn-outline-light').addClass('btn-outline-dark')
 				} else {
 					$('body').addClass('dark');
 					$('#swtich').text('LIGHT').removeClass('btn-outline-dark').addClass('btn-outline-light')
+					$('#modalBtn').removeClass('btn-outline-dark').addClass('btn-outline-light')
 				}
 			}
 		</script>

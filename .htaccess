@@ -1,5 +1,5 @@
 
-RedirectMatch 403 ^/(vendor|node|classroom|fcm)/(.*)$
+RedirectMatch 403 ^/(node|classroom|fcm)/(.*)$
 RedirectMatch 403 ^/settings/(credentials\.json|token\.json)$
 
 RewriteEngine on
