@@ -3,8 +3,14 @@ if(!isset($_COOKIE["email"])){header('Location: ./login');exit();}
 $email=$_COOKIE["email"];$name=$_COOKIE["name"];$uid=$_COOKIE["uid"];
 if(!isset($_SESSION["email"])){$_SESSION["img"]=$_COOKIE["img"];$_SESSION["email"]=$_COOKIE["email"];$_SESSION["name"]=$_COOKIE["name"];$_SESSION["uid"]=$_COOKIE["uid"];}
 ?>
+<?php
+$pagedata = array('title'=>'初期設定','css'=>['css/selmodal.css','//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css','//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css'],'js_top'=>['//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js','https://cdnjs.cloudflare.com/ajax/libs/jquery-color/2.1.2/jquery.color.js','js/Jquery.selmodal.js'],'js_bottom'=>[]);
+?>
+<?php
+require('settings/head.php');
+?>
 
-<link rel="stylesheet" href="css/selmodal.css" media="screen" rel='stylesheet' type='text/css'>
+
 <style>
     h3 {
     color: #f00;
@@ -192,11 +198,6 @@ input[type=checkbox]:checked + label:before {
     width: 50%;
 }
 </style>
-<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-color/2.1.2/jquery.color.js"></script>
-<script src="js/Jquery.selmodal.js"></script>
 <script type="text/javascript">
     $(function(){
       	$('select').selModal();
@@ -309,3 +310,8 @@ function check() {
     </div>
     <input type="submit">
 </form>
+
+
+<?php
+require('settings/foot.php');
+?>

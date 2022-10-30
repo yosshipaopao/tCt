@@ -2,7 +2,7 @@
 //----------変更----------
 $dsn = 'mysql:host=localhost:3306;dbname=trvvdmle_account;charset=utf8mb4';
 $username = 'trvvdmle_account';
-$password = 'Sakagamipaopao0628';
+$password = 'todo-yosshipaopao-jiyujin';
 //------------------------
 try {
     $pdo_ac = new PDO($dsn,$username,$password);

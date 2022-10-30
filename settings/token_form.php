@@ -1,3 +1,6 @@
+<?php
+require("settings/head.php");
+?>
 <style>
     @import url( 'https://fonts.googleapis.com/css?family=Roboto+Condensed:700&subset=cyrillic');
 .block input {
@@ -242,3 +245,6 @@ input[type=checkbox]:checked + label:before {
 
   resetUI();
 </script>
+<?php
+require("settings/foot.php");
+?>
